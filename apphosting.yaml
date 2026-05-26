@@ -1,0 +1,21 @@
+runConfig:
+  minInstances: 0
+  maxInstances: 10
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 1024
+
+env:
+  - variable: NEXT_PUBLIC_APP_URL
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: QR_TOKEN_SECRET
+    availability:
+      - RUNTIME
+  - variable: AUTH_SESSION_SECRET
+    availability:
+      - RUNTIME
+  - variable: MERCADO_PAGO_ACCESS_TOKEN
+    availability:
+      - RUNTIME
