@@ -81,3 +81,12 @@ Para Firebase Hosting com SSR, use um adaptador Next/Firebase adequado ao seu am
 
 Login, cadastro, recuperacao e sessao passam por APIs em `/api/auth/*`.
 O navegador nao valida senha nem grava usuario direto no Firestore. A senha e transformada em hash no backend e a sessao fica em cookie HTTP-only assinado. Em producao, Firestore fica fechado para acesso direto do frontend; as rotas do servidor acessam o banco com Firebase Admin SDK.
+
+### Primeiro administrador
+
+O cadastro publico cria apenas anfitrioes. Para criar o primeiro admin em producao:
+
+1. Configure `ADMIN_SETUP_SECRET` na hospedagem.
+2. Chame `POST /api/auth/bootstrap-admin` com `setupSecret`, `name`, `email` e `password`.
+3. A rota so funciona se ainda nao existir nenhum admin.
+4. Depois de criar o admin, remova ou troque `ADMIN_SETUP_SECRET`.
