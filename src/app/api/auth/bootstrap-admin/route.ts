@@ -29,19 +29,19 @@ export async function POST(request: NextRequest) {
     return fail("Segredo de configuracao invalido.", 403);
   }
 
-  const db = getAdminDb();
-
-  if (!db) {
-    return fail("Firebase Admin precisa estar configurado antes de criar o admin.", 503);
-  }
-
-  const existingAdmins = await db.collection(collections.users).where("role", "==", "ADMIN").limit(1).get();
-
-  if (!existingAdmins.empty) {
-    return fail("Ja existe um administrador cadastrado.", 409);
-  }
-
   try {
+    const db = getAdminDb();
+
+    if (!db) {
+      return fail("Firebase Admin precisa estar configurado antes de criar o admin.", 503);
+    }
+
+    const existingAdmins = await db.collection(collections.users).where("role", "==", "ADMIN").limit(1).get();
+
+    if (!existingAdmins.empty) {
+      return fail("Ja existe um administrador cadastrado.", 409);
+    }
+
     const admin = await createBackendUser({
       name: parsed.data.name,
       email: parsed.data.email,
