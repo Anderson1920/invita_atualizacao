@@ -91,7 +91,7 @@ export default function AdminPage() {
           <header className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">Painel Admin</span>
-              <h1 className="mt-4 text-4xl font-semibold text-violet-950">Operacao INVITA</h1>
+              <h1 className="mt-4 text-4xl font-semibold text-violet-950">Operacao INVITA v2</h1>
             </div>
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
               Sistema online
