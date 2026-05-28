@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useEffect, useState } from "react";
 import { Ban, CalendarCheck2, CheckCircle, CreditCard, LineChart, ShieldCheck, Trash2, UsersRound } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
@@ -91,7 +93,7 @@ export default function AdminPage() {
           <header className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-900">Painel Admin</span>
-              <h1 className="mt-4 text-4xl font-semibold text-violet-950">Operacao INVITA v2</h1>
+              <h1 className="mt-4 text-4xl font-semibold text-violet-950">Operacao INVITA</h1>
             </div>
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
               Sistema online
@@ -102,7 +104,6 @@ export default function AdminPage() {
             <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">{error}</div>
           )}
 
-          {/* Métricas */}
           {loading ? (
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -119,7 +120,6 @@ export default function AdminPage() {
             </section>
           )}
 
-          {/* Tabs */}
           <div className="rounded-[28px] border border-white/80 bg-white p-5 shadow-[0_18px_55px_rgba(88,28,135,0.08)]">
             <div className="mb-5 flex gap-2 border-b border-violet-100 pb-4">
               {tabs.map((t) => (
@@ -135,7 +135,6 @@ export default function AdminPage() {
               ))}
             </div>
 
-            {/* Tab Usuarios */}
             {tab === "usuarios" && (
               loading ? (
                 <div className="space-y-3">{Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-16 animate-pulse rounded-2xl bg-violet-50" />)}</div>
@@ -172,7 +171,6 @@ export default function AdminPage() {
               )
             )}
 
-            {/* Tab Eventos */}
             {tab === "eventos" && (
               loading ? (
                 <div className="grid gap-3 md:grid-cols-2">{Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-24 animate-pulse rounded-2xl bg-violet-50" />)}</div>
@@ -214,7 +212,6 @@ export default function AdminPage() {
               )
             )}
 
-            {/* Tab Pagamentos */}
             {tab === "pagamentos" && (
               loading ? (
                 <div className="space-y-3">{Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-20 animate-pulse rounded-2xl bg-violet-50" />)}</div>
