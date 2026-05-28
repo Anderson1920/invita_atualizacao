@@ -8,18 +8,14 @@ export async function GET(req: NextRequest) {
     if (!requireRole(user, ["ADMIN"])) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
     const db = getAdminDb();
-    if (!db) {
-      return NextResponse.json({ error: "Database unavailable" }, { status: 503 });
-    }
+    if (!db) return NextResponse.json({ error: "Database unavailable" }, { status: 503 });
 
-    const snapshot = await db.collection("users").orderBy("createdAt", "desc").limit(50).get();
+    const snapshot = await db.collection("users").orderBy("createdAt", "desc").limit(100).get();
     const users = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-
     return NextResponse.json({ ok: true, data: users });
   } catch (error) {
-    console.error("Admin users error:", error);
+    console.error("Admin users GET error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
@@ -30,16 +26,12 @@ export async function PATCH(req: NextRequest) {
     if (!requireRole(user, ["ADMIN"])) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
     const { userId, status } = await req.json();
     if (!userId || !status) {
       return NextResponse.json({ error: "Missing userId or status" }, { status: 400 });
     }
-
     const db = getAdminDb();
-    if (!db) {
-      return NextResponse.json({ error: "Database unavailable" }, { status: 503 });
-    }
+    if (!db) return NextResponse.json({ error: "Database unavailable" }, { status: 503 });
 
     await db.collection("users").doc(userId).update({ status });
     return NextResponse.json({ ok: true });
